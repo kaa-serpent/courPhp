@@ -31,11 +31,11 @@ class Routing
             'method'=> 'index',
         ],
         '/api/v1/products' => [
-            'controller' => 'Product',
+            'controller' => 'ProductPage',
             'method'=> 'index',
         ],
         '/products' => [
-            'controller' => 'Product',
+            'controller' => 'ProductPage',
             'method'=> 'index',
         ]
         /*
