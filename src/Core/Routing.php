@@ -28,15 +28,15 @@ class Routing
         ],
         '/auth' => [
             'controller' => 'Authentication',
-            'method'=> 'index'
+            'method'=> 'index',
         ],
         '/api/v1/products' => [
             'controller' => 'Product',
-            'method'=> 'index'
+            'method'=> 'index',
         ],
         '/products' => [
             'controller' => 'Product',
-            'method'=> 'index'
+            'method'=> 'index',
         ]
         /*
          utilisation d'une expresion rationnelle
