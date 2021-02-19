@@ -33,7 +33,7 @@ class ProductQuerry{
                 break;
             case "DELETE":
                 echo "DELETE";
-                $this -> getAllProducts();
+                $this -> removeProduct();
                 break;
         }
     }
@@ -49,7 +49,7 @@ class ProductQuerry{
         $query = $this->connection->prepare($sql);
         $query->execute();
 
-        return $query->fetchObject(User::class);
+        return $query->fetchObject(Product::class);
     }
 
 //post
@@ -64,7 +64,7 @@ class ProductQuerry{
         $query = $this->connection->prepare($sql);
         $query->execute();
 
-        return $query->fetchObject(User::class);
+        return $query->fetchObject(Product::class);
     }
 
 //PUT
@@ -78,7 +78,7 @@ class ProductQuerry{
         $query = $this->connection->prepare($sql);
         $query->execute();
 
-        return $query->fetchObject(User::class);
+        return $query->fetchObject(Productser::class);
     }
 
 //DELETE
@@ -92,6 +92,6 @@ class ProductQuerry{
         $query = $this->connection->prepare($sql);
         $query->execute();
 
-        return $query->fetchObject(User::class);
+        return $query->fetchObject(Product::class);
     }
 }
