@@ -34,6 +34,10 @@ class Routing
             'controller' => 'Product',
             'method'=> 'index'
         ],
+        '/products' => [
+            'controller' => 'Product',
+            'method'=> 'index'
+        ]
         /*
          utilisation d'une expresion rationnelle
             () : création d'un goupe

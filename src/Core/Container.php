@@ -7,10 +7,13 @@ use App\Controller\NotFound;
 use App\Query\ProductQuerry;
 use App\Query\UserQuery;
 use App\Service\JWT;
+use App\Model\Product;
+use App\Controller\ProductPage;
 /*
     container d'instances des classes utilisées dans l'application
     cette classe revoie les instances
 */
+
 class Container
 {
     static public function getInstance(String $namespace)
@@ -37,21 +40,23 @@ class Container
             User::class => function () {
                 return new \App\Model\User();
             },
-            
+
+            Product::class => function () {
+                return new \App\Model\Product();
+            },
+            ProductPage::class => function () {
+                return new \App\Controller\ProductPage();
+            },
             Authentication::class => function () {
                 return new \App\Controller\Authentication(
-                   self::getInstance( 'App\Query\UserQuery'),
-                   self::getInstance(JWT::class),
+                    self::getInstance('App\Query\UserQuery'),
+                    self::getInstance(JWT::class),
                 );
             },
             JWT::class => function () {
                 return new \App\Service\JWT();
             },
-            ProductQuerry::class => function () {
-                return new \App\Query\productQuerry(
-                    self::getInstance('App\Core\Database'),
-                );
-            },            
+
             'App\Query\UserQuery' => function () {
                 return new \App\Query\UserQuery(
                     self::getInstance('App\Core\Database'),

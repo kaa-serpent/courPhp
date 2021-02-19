@@ -4,7 +4,7 @@ namespace App\Controller;
 
 
 
-class ProductController extends AbstractController
+class ProductPage extends AbstractController
 {
     public function index():void
     {
