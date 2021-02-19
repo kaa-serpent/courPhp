@@ -29,7 +29,11 @@ class Routing
         '/auth' => [
             'controller' => 'Authentication',
             'method'=> 'index'
-        ]
+        ],
+        '/api/v1/products' => [
+            'controller' => 'Product',
+            'method'=> 'index'
+        ],
         /*
          utilisation d'une expresion rationnelle
             () : création d'un goupe

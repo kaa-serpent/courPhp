@@ -4,6 +4,7 @@ namespace App\Core;
 
 use App\Controller\Authentication;
 use App\Controller\NotFound;
+use App\Query\ProductQuerry;
 use App\Query\UserQuery;
 use App\Service\JWT;
 /*
@@ -36,6 +37,7 @@ class Container
             User::class => function () {
                 return new \App\Model\User();
             },
+            
             Authentication::class => function () {
                 return new \App\Controller\Authentication(
                    self::getInstance( 'App\Query\UserQuery'),
@@ -45,6 +47,11 @@ class Container
             JWT::class => function () {
                 return new \App\Service\JWT();
             },
+            ProductQuerry::class => function () {
+                return new \App\Query\productQuerry(
+                    self::getInstance('App\Core\Database'),
+                );
+            },            
             'App\Query\UserQuery' => function () {
                 return new \App\Query\UserQuery(
                     self::getInstance('App\Core\Database'),
