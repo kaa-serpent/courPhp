@@ -57,11 +57,6 @@ class Container
                 return new \App\Service\JWT();
             },
 
-            'App\Query\UserQuery' => function () {
-                return new \App\Query\UserQuery(
-                    self::getInstance('App\Core\Database'),
-                );
-            }
         ];
         return $instances[$namespace]();
     }
