@@ -1,6 +1,8 @@
 <?php
 namespace App\Query;
 
+use App\Model\Product;
+use App\Core\Database;
 use PDO;
 
 class ProductQuerry{
