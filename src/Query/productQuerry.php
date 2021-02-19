@@ -14,9 +14,30 @@ class ProductQuerry{
     {
         // récupération de la connexion à la base de données
         $this->connection = $database->connect();
+        
     }
 
-
+    public function getMethod():void{
+        switch ($_SERVER["REQUEST_METHOD"]) {
+            case "POST":
+                echo "POST";
+                $this -> getAllProducts();
+                break;
+            case "GET":
+                echo "GET";
+                $this -> getAllProducts();
+                break;
+            case "PUT":
+                echo "PUT";
+                $this -> getAllProducts();
+                break;
+            case "DELETE":
+                echo "DELETE";
+                $this -> getAllProducts();
+                break;
+        }
+    }
+    
     public function getAllProducts()
     {
         // requête sql
@@ -31,7 +52,7 @@ class ProductQuerry{
         return $query->fetchObject(User::class);
     }
 
-
+//post
     public function getOneProduct($nomProduit)
     {
         $sql="
@@ -46,7 +67,7 @@ class ProductQuerry{
         return $query->fetchObject(User::class);
     }
 
-
+//PUT
     public function addProduct($nomProduit, $typeProduit, $stockProduit, $prixProduit)
     {
         $sql="
@@ -60,7 +81,7 @@ class ProductQuerry{
         return $query->fetchObject(User::class);
     }
 
-
+//DELETE
     public function removeProduct($nomProduit)
     {
         $sql="
