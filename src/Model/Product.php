@@ -2,7 +2,9 @@
 
 namespace App\Model;
 
-class Product
+use JsonSerializable;
+
+class Product implements JsonSerializable
 {
     private int $id;
     private String $nomProduit;
@@ -19,8 +21,17 @@ class Product
     public function setNomProduit(String $value):void {$this->nomProduit = $value;}
     public function setTypeProduit(String $value):void {$this->typeProduit = $value;}
     public function setStockProduit(int $value):void {$this->stockProduit = $value;}
-    public function setPrixProduit(String $value):void {$this->prixProduitt = $value;}
+    public function setPrixProduit(int $value):void {$this->prixProduitt = $value;}
 
-  
+    public function jsonSerialize():array
+    {
+        return [
+            'id' => $this->getId(),
+            'Nom' => $this->getNomProduit(),
+            'Type' => $this->getTypeProduit(),
+            'Stock' => $this->getStockProduit(),
+            'Prix' => $this->getPrixProduit()
+        ];
+    }
 
 }

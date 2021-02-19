@@ -20,19 +20,15 @@ class ProductQuerry{
     public function getMethod():void{
         switch ($_SERVER["REQUEST_METHOD"]) {
             case "POST":
-                echo "POST";
-                $this -> getAllProducts();
+                $this -> addProduct();
                 break;
             case "GET":
-                echo "GET";
                 $this -> getAllProducts();
                 break;
             case "PUT":
-                echo "PUT";
-                $this -> getAllProducts();
+                $this -> modifyProduct();
                 break;
             case "DELETE":
-                echo "DELETE";
                 $this -> removeProduct();
                 break;
         }
@@ -48,39 +44,50 @@ class ProductQuerry{
         
         $query = $this->connection->prepare($sql);
         $query->execute();
-
+        echo json_encode($query->fetchObject(Product::class));
         return $query->fetchObject(Product::class);
     }
 
-//post
-    public function getOneProduct($nomProduit)
+//put
+    public function modifyProduct()
     {
+        $body = json_decode(file_get_contents('php://input'));
         $sql="
-            SELECT *
-            FROM amazonne.produit
-            WHERE produit.nomProduit LIKE $nomProduit
+            UPDATE amazonne.produit
+            SET nomProduit = :nomProduit,
+                typeProduit = :typeProduit,
+                stockProduit = :stockProduit,
+                prixProduit = :prixProduit
+            WHERE produit.nomProduit LIKE :nomProduit
         ";
 
         $query = $this->connection->prepare($sql);
-        $query->execute();
+        $query->execute([
+            'nomProduit'=> $body->nomProduit,
+            'typeProduit'=>$body->typeProduit,
+            'stockProduit'=>$body->stockProduit,
+            'prixProduit'=>$body->prixProduit
+        ]);
 
         return $query->fetchObject(Product::class);
     }
 
-//PUT
     public function addProduct()
     {
-        $nomProduit = htmlspecialchars($_POST["nomProduit"]);
-        $typeProduit = htmlspecialchars($_POST["typeProduit"]);
-        $stockProduit = htmlspecialchars($_POST["stockProduit"]);
-        $prixProduit = htmlspecialchars($_POST["prixProduit"]);
+        
+        $body = json_decode(file_get_contents('php://input'));
         $sql="
             INSERT INTO amazonne.produit (nomProduit, typeProduit, stockProduit, prixProduit)
-            VALUES ($nomProduit, $typeProduit, $stockProduit, $prixProduit)
+            VALUES (:nomProduit, :typeProduit, :stockProduit, :prixProduit)
         ";
-
+//$nomProduit, $typeProduit, $stockProduit, $prixProduit)
         $query = $this->connection->prepare($sql);
-        $query->execute();
+        $query->execute([
+            'nomProduit'=> $body->nomProduit,
+            'typeProduit'=>$body->typeProduit,
+            'stockProduit'=>$body->stockProduit,
+            'prixProduit'=>$body->prixProduit
+        ]);
 
         return $query->fetchObject(Product::class);
     }
@@ -88,14 +95,16 @@ class ProductQuerry{
 //DELETE
     public function removeProduct()
     {
-        $nomProduit = file_get_contents('php://input');
+        $body = json_decode(file_get_contents('php://input'));
         $sql="
             DELETE FROM amazonne.produit
-            WHERE nomProduit LIKE $nomProduit 
+            WHERE nomProduit LIKE :nomProduit 
         ";
 
         $query = $this->connection->prepare($sql);
-        $query->execute();
+        $query->execute([
+            'nomProduit'=> $body->nomProduit
+        ]);
 
         return $query->fetchObject(Product::class);
     }
