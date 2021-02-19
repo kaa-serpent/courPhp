@@ -9,6 +9,7 @@
 require_once '../vendor/autoload.php';
 
 use App\Controller\ProductController;
+use App\Controller\ProductPage;
 use App\Core\Container;
 use App\Core\Dotenv;
 use App\Core\Routing;
@@ -26,7 +27,8 @@ Dotenv::load();
 //echo'<pre>'; var_dump($userQuery->checkUser('admin', 'admin')); echo'<pre>'; exit;
 // import des classes
 //use App\Core\Routing;
-//$product = Container::getInstance(ProductController::class); 
+$product = Container::getInstance(ProductPage::class);
+
 $jwt = Container::getInstance(JWT::class);
 //echo'<pre>'; var_dump($jwt->generate()); echo'<pre>';
 //echo'<pre>'; var_dump($jwt->verify('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTM2NTU4Mzd9.Nzc4ZGZiMzc2YTY0NzM2NTkzMjVkOTQ2NGMwMjE0NzdjNTFmOWQ4M2JjMjJmNTM3MDhmMTFiNjcyZGM0ODNkOA')); echo'<pre>'; exit;
