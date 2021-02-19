@@ -40,7 +40,7 @@ class Container
             User::class => function () {
                 return new \App\Model\User();
             },
-
+           
             Product::class => function () {
                 return new \App\Model\Product();
             },
@@ -56,6 +56,11 @@ class Container
             JWT::class => function () {
                 return new \App\Service\JWT();
             },
+             'App\Query\UserQuery' => function () {
+                return new \App\Query\UserQuery(
+                    self::getInstance('App\Core\Database'),
+                );
+            }
 
         ];
         return $instances[$namespace]();
