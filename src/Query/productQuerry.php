@@ -15,56 +15,61 @@ class ProductQuerry{
         // récupération de la connexion à la base de données
         $this->connection = $database->connect();
     }
+    
 
     public function getAllProducts()
     {
         // requête sql
-        $sql='
+        $sql="
             SELECT *
-            FROM api.produit
-        ';
+            FROM amazonne.produit
+        ";
         
         $query = $this->connection->prepare($sql);
-        $query->execute($args);
+        $query->execute();
 
         return $query->fetchObject(User::class);
     }
-    public function getOneProduct()
+
+
+    public function getOneProduct($produit)
     {
-        $sql='
+        $sql="
             SELECT *
-            FROM api.produit
-            WHERE produit.nomProduit is $laVariable
-        ';
+            FROM amazonne.produit
+            WHERE produit.nomProduit IS $produit
+        ";
 
         $query = $this->connection->prepare($sql);
-        $query->execute($args);
+        $query->execute();
 
         return $query->fetchObject(User::class);
     }
-    public function addProduct()
+
+
+    public function addProduct($nomProduit, $typeProduit, $stockProduit, $prixProduit)
     {
-        $sql='
-            INSERT INTO api.produit
+        $sql="
+            INSERT INTO amazonne.produit
             VALUES ($nomProduit, $typeProduit, $stockProduit, $prixProduit)
-        ';
+        ";
 
         $query = $this->connection->prepare($sql);
-        $query->execute($args);
+        $query->execute();
 
         return $query->fetchObject(User::class);
     }
-    public function removeProduct()
+
+
+    public function removeProduct($nomProduit)
     {
-
-        $sql='
-            DELETE FROM api.produit
+        $sql="
+            DELETE FROM amazonne.produit
             WHERE nomProduit IS $nomProduit 
-        ';
-
+        ";
 
         $query = $this->connection->prepare($sql);
-        $query->execute($args);
+        $query->execute();
 
         return $query->fetchObject(User::class);
     }

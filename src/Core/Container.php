@@ -47,7 +47,7 @@ class Container
             JWT::class => function () {
                 return new \App\Service\JWT();
             },
-            ProductQuerry::class => function () {
+            'App\Query\ProductQuerry' => function () {
                 return new \App\Query\productQuerry(
                     self::getInstance('App\Core\Database'),
                 );
