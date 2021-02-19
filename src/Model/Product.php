@@ -12,6 +12,6 @@ class ProductController
 
     public function getId():int{return $this ->id;}
     public function getNomProduit():String{return $this ->nomProduit;}
-    public function getTypeProduitt():String{return $this ->typeProduit;}
-    public function getStockProdui():int{return $this ->stockProdui;}
+    public function getTypeProduit():String{return $this ->typeProduit;}
+    public function getStockProduit():int{return $this ->stockProdui;}
 }

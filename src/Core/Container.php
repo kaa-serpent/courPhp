@@ -51,12 +51,7 @@ class Container
                 return new \App\Query\productQuerry(
                     self::getInstance('App\Core\Database'),
                 );
-            },            
-            'App\Query\UserQuery' => function () {
-                return new \App\Query\UserQuery(
-                    self::getInstance('App\Core\Database'),
-                );
-            }
+            },
         ];
         return $instances[$namespace]();
     }

@@ -15,7 +15,7 @@ class ProductQuerry{
         // récupération de la connexion à la base de données
         $this->connection = $database->connect();
     }
-    
+
 
     public function getAllProducts()
     {
@@ -32,12 +32,12 @@ class ProductQuerry{
     }
 
 
-    public function getOneProduct($produit)
+    public function getOneProduct($nomProduit)
     {
         $sql="
             SELECT *
             FROM amazonne.produit
-            WHERE produit.nomProduit IS $produit
+            WHERE produit.nomProduit LIKE $nomProduit
         ";
 
         $query = $this->connection->prepare($sql);
@@ -50,7 +50,7 @@ class ProductQuerry{
     public function addProduct($nomProduit, $typeProduit, $stockProduit, $prixProduit)
     {
         $sql="
-            INSERT INTO amazonne.produit
+            INSERT INTO amazonne.produit (nomProduit, typeProduit, stockProduit, prixProduit)
             VALUES ($nomProduit, $typeProduit, $stockProduit, $prixProduit)
         ";
 
@@ -65,7 +65,7 @@ class ProductQuerry{
     {
         $sql="
             DELETE FROM amazonne.produit
-            WHERE nomProduit IS $nomProduit 
+            WHERE nomProduit LIKE $nomProduit 
         ";
 
         $query = $this->connection->prepare($sql);
