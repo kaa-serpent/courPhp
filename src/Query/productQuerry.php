@@ -68,8 +68,12 @@ class ProductQuerry{
     }
 
 //PUT
-    public function addProduct($nomProduit, $typeProduit, $stockProduit, $prixProduit)
+    public function addProduct()
     {
+        $nomProduit = htmlspecialchars($_POST["nomProduit"]);
+        $typeProduit = htmlspecialchars($_POST["typeProduit"]);
+        $stockProduit = htmlspecialchars($_POST["stockProduit"]);
+        $prixProduit = htmlspecialchars($_POST["prixProduit"]);
         $sql="
             INSERT INTO amazonne.produit (nomProduit, typeProduit, stockProduit, prixProduit)
             VALUES ($nomProduit, $typeProduit, $stockProduit, $prixProduit)
@@ -78,12 +82,13 @@ class ProductQuerry{
         $query = $this->connection->prepare($sql);
         $query->execute();
 
-        return $query->fetchObject(Productser::class);
+        return $query->fetchObject(Product::class);
     }
 
 //DELETE
-    public function removeProduct($nomProduit)
+    public function removeProduct()
     {
+        $nomProduit = file_get_contents('php://input');
         $sql="
             DELETE FROM amazonne.produit
             WHERE nomProduit LIKE $nomProduit 
